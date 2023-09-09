@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>欢迎注册</title>
+    <style type="text/css">
+      .box{
+
+      }
+      .show{
+        background-color: #ccc;
+        font-family: "黑体";
+        font-size: 30px;
+        color: blue;
+        font-style: italic;
+        padding: 5px 10px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="data.html" method="get" ver>
+      <div id="phnum">
+        <label for="phonenumber"><strong>手机号码:</strong></label>
+        <input
+          type="text"
+          id="phonenumber"
+          name="phnum"
+          placeholder="11位手机号"
+        />
+        <span style="color: red">必填</span>
+      </div>
+      <div id="pwd">
+        <label for="password"><strong>创建密码:</strong></label>
+        <input
+          type="password"
+          id="password"
+          name="pwd"
+          placeholder="11位手机号"
+        />
+        <span style="color: red">必填</span>
+      </div>
+      <div id="email">
+        <label for="email"><strong>注册邮箱:</strong></label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="例如wustzz@sina.com"
+        />
+        <span style="color: red">必填</span>
+      </div>
+        <div class="box">
+          <div class="code-row">
+            <div class="show"></div>
+            <div class="change-link"><a href="javascript:getnewcode();">看不清换一张</a></div>
+          </div>
+          <div class="code-row">
+            <span>验证码:</span><input id="ipt" type="text">
+          </div>
+          <div class="code-row">
+            <button id="btn">确定</button>
+          </div>
+        </div>
+        <script type="text/javascript">
+          //获取需要操作元素
+          const show = document.querySelector('.show')
+          const ipt=document.querySelector('#ipt')
+          const btn=document.querySelector('#btn') 
+          btn.addEventListener('click', function(){
+            if(show.innerHTML==ipt.value){
+              alert('验证通过')
+            }
+            else{
+              alert('验证码错误')
+            }
+          })
+          getnewcode();
+          function getnewcode(){
+            show.innerHTML=getCode();
+          }
+          //生产随机验证码
+          function getCode(){
+              const arr=['a','b','c','d','e','f','g','h','1','2','3','4','5','6','7','9']  
+             let codeStr=''
+             for(let i=0;i<6;i++)
+            {
+              let index=parseInt(Math.random()*arr.length);
+              codeStr+=arr[index]
+            }
+          return codeStr
+          }
+        </script>
+      </div>
+      <div id="sex">
+        <input type="radio" name="sex" checked="checked" />男
+        <input type="radio" name="sex" value="female" />女
+      </div>
+      <div id="birthday">
+        <label for="birthday"><strong>生日:</strong></label>
+        <input type="text" id="birthday" name="btd" placeholder="年/月/日" />
+      </div>
+      <div id="jiguan">
+        <strong>籍贯:</strong>
+        <select name="jiguan" id="jiguan">
+          <option value="0">湖北</option>
+        </select>
+        <select name="jiguan" id="jiguan">
+          <option value="0">武汉</option>
+        </select>
+      </div>
+      <div id="education">
+        <strong>个人学历</strong>
+        <select name="education" id="education">
+          <option value="0">无</option>
+          <option value="0">小学</option>
+          <option value="0">高中</option>
+          <option value="0">本科</option>
+          <option value="0">研究生</option>
+          <option value="0">博士</option>
+          <option value="0">硕士</option>
+        </select>
+      </div>
+      <div id="salary">
+        <strong>月薪：</strong>
+        <input
+          type="range"
+          name="salary"
+          min="0"
+          max="20000"
+          step="1"
+          value="5000"
+        />
+        <span id="msg"></span>
+        <!-- 用于显示滑块值 -->
+      </div>
+      <script>
+        var msg = document.getElementById("msg"); //根据id找到span元素
+        window.onload = function () {
+          //用于在页面元素加载完成时执行
+          msg.innerHTML = document.getElementById("salary").value;
+        };
+
+        document.getElementById("salary").onchange = function () {
+          msg.innerHTML = this.value; //将当前区间域的value元素作为span元素的内容。
+        };
+      </script>
+
+      <div id="habby">
+        <strong>个人爱好</strong>
+        <label>
+          <input type="checkbox" name="like" value="singing" />唱歌
+        </label>
+        <label>
+          <input type="checkbox" name="like" value="swimming" />游泳
+        </label>
+        <label>
+          <input type="checkbox" name="like" value="running" />跑步
+        </label>
+      </div>
+      <div id="photo">
+        <form method="post" action="#" enctype="multipart/form-data">
+          <p><strong>图片预览：</strong></p>
+          <p></p>
+          <div
+            id="test-image-preview"
+            style="
+              border: 1px solid silver;
+              width: 100%;
+              height: 200px;
+              background-repeat: no-repeat;
+              background-position: center;
+            "
+          ></div>
+          <p></p>
+          <p>
+            <input type="file" id="test-image-file" name="test" />
+          </p>
+          <p id="test-file-info">没有选择文件</p>
+        </form>
+        <script>
+          var fileInput = document.getElementById("test-image-file");
+          var info = document.getElementById("test-file-info");
+          var preview = document.getElementById("test-image-preview");
+          fileInput.addEventListener("change", function () {
+            // 监听change事件
+            preview.style.backgroundImage = ""; // 清除背景图片
+            if (!fileInput.value) {
+              info.innerHTML = "没有选择文件";
+              return;
+            }
+            var file = fileInput.files[0]; // 获取File引用
+            // 获取File信息:
+            info.innerHTML =
+              "文件: " +
+              file.name +
+              "<br>" +
+              "大小: " +
+              file.size +
+              "<br>" +
+              "修改: " +
+              file.lastModifiedDate;
+            if (
+              file.type !== "image/jpeg" &&
+              file.type !== "image/png" &&
+              file.type !== "image/gif"
+            ) {
+              alert("不是有效的图片文件!");
+              return;
+            }
+            var reader = new FileReader(); // 读取文件
+            reader.onload = function (e) {
+              // 发起一个异步操作来读取文件内容
+              var data = e.target.result; // data串形如： 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
+              preview.style.backgroundImage = "url(" + data + ")";
+            };
+            reader.readAsDataURL(file); // 以DataURL的形式读取文件
+          });
+        </script>
+      </div>
+      <div id="self">
+        <strong>个人简历：</strong><br />
+        <textarea
+          name="intro"
+          id="self"
+          cols="30"
+          rows="10"
+          placeholder="请填写个人简历"
+        ></textarea>
+      </div>
+      <input type="submit" value="提交" />
+      <input type="reset" value="重填" />
+    </form>
+  </body>
+</html>
