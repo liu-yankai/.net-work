@@ -3,28 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>欢迎注册</title>
-    <style type="text/css">
-      .box{
-
-      }
-      .show{
-        background-color: #ccc;
-        font-family: "黑体";
-        font-size: 30px;
-        color: blue;
-        font-style: italic;
-        padding: 5px 10px;
+    <title>Document</title>
+    <style>
+      label{
         display: inline-block;
+        width: 80px;
+        text-align: right;
+        font-weight: 700;
       }
     </style>
   </head>
   <body>
     <form action="data.html" method="get" ver>
       <div id="phnum">
-        <label for="phonenumber"><strong>手机号码:</strong></label>
+        <label for="phonenumber">手机号码:</label>
         <input
-          type="text"
+          type="text "
           id="phonenumber"
           name="phnum"
           placeholder="11位手机号"
@@ -32,17 +26,17 @@
         <span style="color: red">必填</span>
       </div>
       <div id="pwd">
-        <label for="password"><strong>创建密码:</strong></label>
+        <label for="password">创建密码:</label>
         <input
           type="password"
           id="password"
           name="pwd"
-          placeholder="11位手机号"
+          placeholder="请输入密码 "
         />
         <span style="color: red">必填</span>
       </div>
       <div id="email">
-        <label for="email"><strong>注册邮箱:</strong></label>
+        <label for="email">注册邮箱:</label>
         <input
           type="text"
           id="email"
@@ -51,58 +45,44 @@
         />
         <span style="color: red">必填</span>
       </div>
-        <div class="box">
-          <div class="code-row">
-            <div class="show"></div>
-            <div class="change-link"><a href="javascript:getnewcode();">看不清换一张</a></div>
-          </div>
-          <div class="code-row">
-            <span>验证码:</span><input id="ipt" type="text">
-          </div>
-          <div class="code-row">
-            <button id="btn">确定</button>
-          </div>
-        </div>
-        <script type="text/javascript">
-          //获取需要操作元素
-          const show = document.querySelector('.show')
-          const ipt=document.querySelector('#ipt')
-          const btn=document.querySelector('#btn') 
-          btn.addEventListener('click', function(){
-            if(show.innerHTML==ipt.value){
-              alert('验证通过')
-            }
-            else{
-              alert('验证码错误')
-            }
-          })
-          getnewcode();
-          function getnewcode(){
-            show.innerHTML=getCode();
-          }
-          //生产随机验证码
-          function getCode(){
-              const arr=['a','b','c','d','e','f','g','h','1','2','3','4','5','6','7','9']  
-             let codeStr=''
-             for(let i=0;i<6;i++)
-            {
-              let index=parseInt(Math.random()*arr.length);
-              codeStr+=arr[index]
-            }
-          return codeStr
-          }
-        </script>
+      <div id="yanzhengma">
+        <label for="yanzhengma">验证码:</label>
+        <input type="text" id="yanzhengma" name="yzm" />
+        <span id="yzm" style="background-color: rgb(249, 0, 0);"></span>
+        <span><a href="javascript:reflesh();"><img src="images\arrow_03.png" style="width: 20px; height: 20px;" alt=""></a></span>
       </div>
+
+      <script>
+        const yzm = document.getElementById('yzm')
+        reflesh();
+        function reflesh(){
+          yzm.innerHTML = getcode();
+          
+        }
+        function getcode(){//随机验证码生成
+          const arr = ['a','b','c','d','e','f','g','h','i','j'
+                      ,'k','l','m','n','o','p','q','r','s','t'
+                      ,'u','v','w','x','y','z']
+          let codestr = ''
+          for(let i = 0; i < 4; i++){
+            let index = parseInt(Math.random()*arr.length);
+            codestr += arr[index];
+          }
+          return codestr;
+        }
+      </script>
+
       <div id="sex">
+        <label for="">性别:</label>
         <input type="radio" name="sex" checked="checked" />男
         <input type="radio" name="sex" value="female" />女
       </div>
       <div id="birthday">
-        <label for="birthday"><strong>生日:</strong></label>
-        <input type="text" id="birthday" name="btd" placeholder="年/月/日" />
+        <label for="birthday">生日:</label>
+        <input type="date" name="mydate">
       </div>
       <div id="jiguan">
-        <strong>籍贯:</strong>
+        <label for="">籍贯:</label>
         <select name="jiguan" id="jiguan">
           <option value="0">湖北</option>
         </select>
@@ -111,7 +91,7 @@
         </select>
       </div>
       <div id="education">
-        <strong>个人学历</strong>
+        <label for="">个人学历:</label>
         <select name="education" id="education">
           <option value="0">无</option>
           <option value="0">小学</option>
@@ -122,9 +102,10 @@
           <option value="0">硕士</option>
         </select>
       </div>
-      <div id="salary">
-        <strong>月薪：</strong>
+      <div>
+        <label for="">薪资:</label>
         <input
+          id="salary"
           type="range"
           name="salary"
           min="0"
@@ -134,6 +115,7 @@
         />
         <span id="msg"></span>
         <!-- 用于显示滑块值 -->
+        
       </div>
       <script>
         var msg = document.getElementById("msg"); //根据id找到span元素
@@ -148,7 +130,7 @@
       </script>
 
       <div id="habby">
-        <strong>个人爱好</strong>
+        <label for="">个人爱好:</label>
         <label>
           <input type="checkbox" name="like" value="singing" />唱歌
         </label>
@@ -161,19 +143,18 @@
       </div>
       <div id="photo">
         <form method="post" action="#" enctype="multipart/form-data">
-          <p><strong>图片预览：</strong></p>
-          <p></p>
+          <label>个人照片:</label>
           <div
             id="test-image-preview"
             style="
               border: 1px solid silver;
-              width: 100%;
+              width: 200px;
               height: 200px;
               background-repeat: no-repeat;
               background-position: center;
             "
+            
           ></div>
-          <p></p>
           <p>
             <input type="file" id="test-image-file" name="test" />
           </p>
@@ -220,7 +201,7 @@
         </script>
       </div>
       <div id="self">
-        <strong>个人简历：</strong><br />
+        <label for="">个人简历:<br></label><br>
         <textarea
           name="intro"
           id="self"
